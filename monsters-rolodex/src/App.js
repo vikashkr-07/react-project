@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import Cardlist from "./components/card-list/Cardlist";
+import SearchBox from "./components/search-box/Search-Box";
 
 function App() {
   const [searchField, setSearchField] = useState("");
@@ -23,28 +25,10 @@ function App() {
   });
 
   return (
-    <div className="card-list">
+    <div>
       <h1 className="monster-title">Monsters Rolodex</h1>
-      <input
-        type="search"
-        placeholder="search monster"
-        onChange={onSearchChange}
-      />
-
-      {filteredMonsters.map((monster) => {
-        const { id, name, email } = monster;
-
-        return (
-            <div className="card-container">
-              <img
-                alt="monsters"
-                src={`https://robohash.org/${id}?set=set2&size=180x180`}
-              />
-              <h2>{name}</h2>
-              <p>{email}</p>
-            </div>
-        );
-      })}
+      <SearchBox onSearchChange={onSearchChange} />
+      <Cardlist monsters={filteredMonsters} />
     </div>
   );
 }
